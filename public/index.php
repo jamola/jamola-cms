@@ -12,13 +12,13 @@ require_once ROOT_PATH . '/src/Controller.php';
 require_once ROOT_PATH . '/src/Template.php';
 require_once ROOT_PATH . 'src/DatabaseConnection.php';
 require_once ROOT_PATH . 'model/Page.php';
-
+require_once ROOT_PATH . '../dbconfig.php';
  
 // echo "Hello [public/darwin-cms]"."<br />";
 
 // Bootstrap
   /* Connect to a MySQL database using driver invocation */
-DatabaseConnection::connect('localhost', '', '', ''); 
+DatabaseConnection::connect(DBNAME, HOST, USER, PASS); 
 
 
 // if / else logic 

@@ -17,8 +17,7 @@ require_once './src/Controller.php';
 class ContactController extends Controller {
 
     function runBeforeAction() {
-        if ($_SESSION['has_submitted_the_form'] ?? 0 == 1 ) {  
-            
+        if ($_SESSION['has_submitted_the_form'] ?? 0 == 1 ) { 
             
             $dbh = DatabaseConnection::getInstance();
             $dbc = $dbh->getConnection();
@@ -32,12 +31,11 @@ class ContactController extends Controller {
 
             return false;
         }
-        // var_dump($_SESSION);
-        // var_dump($_GET);
+        
         return true;
     }
 
-    function defaultAction() {
+    function defaultAction() { 
 
         $variables['title'] = '';
         $variables['content']= '';

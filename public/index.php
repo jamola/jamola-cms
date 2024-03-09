@@ -3,18 +3,19 @@ session_start();
 
 /* ini_set ('display_errors', 1);
 ini_set ('display_startup_errors', 1);
-error_reporting (E_ALL);  */
+error_reporting (E_ALL);  */ 
 
 define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 define('VIEW_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR);
 
 require_once ROOT_PATH . '/src/Controller.php';
 require_once ROOT_PATH . '/src/Template.php';
-require_once ROOT_PATH . 'src/DatabaseConnection.php';
-require_once ROOT_PATH . 'model/Page.php';
 require_once ROOT_PATH . '../dbconfig.php';
- 
-// echo "Hello [public/darwin-cms]"."<br />";
+require_once ROOT_PATH . 'src/DatabaseConnection.php';
+require_once ROOT_PATH . 'src/Entity.php';
+require_once ROOT_PATH . 'src/Router.php';
+require_once ROOT_PATH . 'model/Page.php';
+
 
 // Bootstrap
   /* Connect to a MySQL database using driver invocation */
@@ -24,12 +25,21 @@ DatabaseConnection::connect(DBNAME, HOST, USER, PASS);
 // if / else logic 
 
 $section = $_GET['section'] ?? $_POST['section'] ?? 'home';
-$action = $_GET['action'] ?? $_POST['action'] ?? 'default';
+$act = $_GET['action'] ?? $_POST['action'] ?? 'default';
 
+/* Deviating from using 'pretty urls' */
+$action = $_GET['seo_name'] ?? 'home';
 
-// echo "section: ".$section."<br />";
+$dbh = DatabaseConnection::getInstance();
+$dbc = $dbh->getConnection();
 
-if ($section=='about-us') {
+$router = new Router($dbc);
+
+$router->findBy('pretty_url',$action);
+
+$action = $router->action != '' ? $router->action : 'default';
+
+if ($router->module=='page') {
     
     include ROOT_PATH . 'controller/AboutUsController.php';
 
@@ -41,7 +51,7 @@ if ($section=='about-us') {
 
     include ROOT_PATH . 'controller/contactPage.php';
     $contactController = new ContactController();
-    // echo "action: ".$action."<br />";
+    
     $contactController->runAction($action);
 
 } else {

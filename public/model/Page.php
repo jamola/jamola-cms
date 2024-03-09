@@ -25,6 +25,10 @@ class Page {
     $this->title = $pageData['title'];
     $this->content = $pageData['content'];
 
+    /* echo "<pre>Page object:";
+    var_dump($this);
+    echo "</pre>"; */
+
   }
 
 }

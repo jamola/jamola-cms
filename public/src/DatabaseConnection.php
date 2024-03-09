@@ -8,14 +8,10 @@ final class DatabaseConnection {
 
   public static function getInstance() {
     if (is_null(self::$instance)) {
-      // var_dump('We are creating an instance');echo "<br />";
       self::$instance = new DatabaseConnection();
     }
-    // var_dump('We are returning an instance');echo "<br />";
+
     return self::$instance;
-
-
-
   }
 
   private function __construct() {}

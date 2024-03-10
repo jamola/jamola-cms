@@ -5,10 +5,6 @@ class Controller {
     protected $entityId;
 
 public function runAction($actionName) {
-    /* echo "runAction (), actionName 1: ".$actionName."<br />";
-    // echo method_exists($his, $actionName) ? "actionName exists" : "actionName DOES NOT exists";
-    var_dump(method_exists($this,'show'));
-    echo "BOF!"; */
 
     if(method_exists($this, 'runBeforeAction')) {
       $result = $this->runBeforeAction();

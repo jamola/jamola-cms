@@ -10,8 +10,7 @@ error_reporting (E_ALL); */
 
 
 // Det ser ud til at 'Controller.php' skal includeres her. selv om den er inkluderet i index.php
-// require_once './src/Controller.php';
-require_once './src/Controller.php';
+// Dette virker require_once './src/Controller.php';
 
 
 class ContactController extends Controller {

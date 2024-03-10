@@ -1,34 +1,17 @@
 <?php
 
-class Page {
-
-  public $id;
-  public $title;
-  public $content;
-    
-  private $dbc;
+class Page extends Entity {
     
   public function __construct($dbc) {
       $this->dbc = $dbc;
-  }
 
-  public function findById($id) {  
+      $this->tableName = 'pages';
 
-    $sql = "SELECT * FROM pages WHERE id = :id";
-    $stmt = $this->dbc->prepare($sql);
-    $stmt->execute(['id' => $id]);
-    $pageData = $stmt->fetch();
-
-    // var_dump($pageData);
-
-    $this->id = $pageData['id'];
-    $this->title = $pageData['title'];
-    $this->content = $pageData['content'];
-
-    /* echo "<pre>Page object:";
-    var_dump($this);
-    echo "</pre>"; */
-
+      $this->fields = [
+        'id',
+        'title',
+        'content'
+      ];
   }
 
 }

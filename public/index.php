@@ -1,10 +1,6 @@
 <?php 
 session_start();
 
-/* ini_set ('display_errors', 1);
-ini_set ('display_startup_errors', 1);
-error_reporting (E_ALL);  */ 
-
 define('ROOT_PATH', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 define('VIEW_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR);
 
@@ -22,12 +18,11 @@ require_once ROOT_PATH . 'model/Page.php';
 DatabaseConnection::connect(DBNAME, HOST, USER, PASS); 
 
 
-// if / else logic 
-
+/* // if / else logic 
 $section = $_GET['section'] ?? $_POST['section'] ?? 'home';
-$act = $_GET['action'] ?? $_POST['action'] ?? 'default';
+$act = $_GET['action'] ?? $_POST['action'] ?? 'default'; */
 
-/* Deviating from using 'pretty urls' */
+// Routing /* Deviating from using 'pretty urls' */
 $action = $_GET['seo_name'] ?? 'home';
 
 $dbh = DatabaseConnection::getInstance();
@@ -38,24 +33,17 @@ $router = new Router($dbc);
 $router->findBy('pretty_url',$action);
 
 $action = $router->action != '' ? $router->action : 'default';
+$moduleName = ucfirst($router->module) . 'Controller';
 
-if ($router->module=='page') {
+
+if(file_exists(ROOT_PATH . 'controller/' . $moduleName . '.php')) {
     
-    include ROOT_PATH . 'controller/AboutUsController.php';
-
-    $aboutController = new aboutUsController();
-    $aboutController->runAction($action);
-
-
-} else if ($section == 'contact'){    
-
-    include ROOT_PATH . 'controller/contactPage.php';
-    $contactController = new ContactController();
-    
-    $contactController->runAction($action);
+    include ROOT_PATH . 'controller/' . $moduleName . '.php';
+    $controller = new $moduleName();
+    $controller->setEntityId($router->entity_id);
+    $controller->runAction($action);
 
 } else {
-    include ROOT_PATH . 'controller/homePage.php';
-    $homePageController = new HomePageController();
-    $homePageController->runAction($action);
+    echo "file does not exist";
 }
+

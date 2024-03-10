@@ -1,19 +1,14 @@
 <?php
 
+class PageController extends Controller {
 
-class HomePageController extends Controller {
   function defaultAction() {
-    // fetch the SEO
-    // get the page data
-    // $title
-    // $content
-    // $variable1
 
     $dbh = DatabaseConnection::getInstance();
     $dbc = $dbh->getConnection();
 
     $pageObj = new Page($dbc);
-    $pageObj->findById(1);
+    $pageObj->findBy('id', $this->entityId);
     $variables['pageObj'] = $pageObj;
 
 
@@ -23,4 +18,3 @@ class HomePageController extends Controller {
   }
 
 }
-

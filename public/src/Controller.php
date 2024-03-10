@@ -2,6 +2,7 @@
 
 class Controller {
 
+    protected $entityId;
 
 public function runAction($actionName) {
     /* echo "runAction (), actionName 1: ".$actionName."<br />";
@@ -24,4 +25,12 @@ public function runAction($actionName) {
         include 'view/status-pages/404.html';
     }
   }
+
+  public function setEntityId($entityId) {
+    // echo "i setEntityId()";
+    $this->entityId = $entityId;    
+  }
+
+
+
 }

@@ -13,7 +13,7 @@ class PageController extends Controller {
 
 
     $template = new Template('default');
-    $template->view('static-page', $variables);
+    $template->view('page/views/static-page', $variables);
 
   }
 

@@ -3,10 +3,11 @@
 class Page extends Entity {
     
   public function __construct($dbc) {
-      $this->dbc = $dbc;
+    parent::__construct($dbc, 'pages');
 
-      $this->tableName = 'pages';
+  }
 
+  protected function initFields() {
       $this->fields = [
         'id',
         'title',

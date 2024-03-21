@@ -13,18 +13,10 @@ require_once ROOT_PATH . 'src/Entity.php';
 require_once ROOT_PATH . 'src/Router.php';
 require_once MODULE_PATH . 'page/models/Page.php';
 
-/* echo "<pre>MODULE_PATH";
-var_dump(MODULE_PATH);
-echo "</pre>"; */
-
 // Bootstrap
   /* Connect to a MySQL database using driver invocation */
 DatabaseConnection::connect(DBNAME, HOST, USER, PASS); 
 
-
-/* // if / else logic 
-$section = $_GET['section'] ?? $_POST['section'] ?? 'home';
-$act = $_GET['action'] ?? $_POST['action'] ?? 'default'; */
 
 // Routing /* Deviating from using 'pretty urls' */
 $action = $_GET['seo_name'] ?? 'home';
@@ -40,9 +32,6 @@ $action = $router->action != '' ? $router->action : 'default';
 $moduleName = ucfirst($router->module) . 'Controller';
 
 $controllerFile = MODULE_PATH . $router->module . '/controllers/' . $moduleName . '.php';
-/* echo "<pre>controllerFile";
-var_dump($controllerFile);
-echo "</pre>"; */
 
 
 if(file_exists($controllerFile)) {

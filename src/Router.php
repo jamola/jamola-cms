@@ -16,7 +16,7 @@ class Router extends Entity {
       'entity_id',
       'pretty_url'
     ];
-}
+  }
 
 
 }

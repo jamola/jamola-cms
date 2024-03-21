@@ -21,16 +21,16 @@ abstract class Entity {
         $stmt = $this->dbc->prepare($sql);
         $stmt->execute(['value' => $fieldValue]);
         $databaseData = $stmt->fetch();
-        
-        $databaseData ? $this->setValues($databaseData) : NULL;
+//         $stmt->debugDumpParams();        
+        if($databaseData){
+            $this->setValues($databaseData);
+        }
 
     }
     
     public function setValues($values) {
         
-        foreach ($this->fields as $fieldName) {
-            
-            // TODO! Check if values is NULL!!
+        foreach ($this->fields as $fieldName) {            
             $this->$fieldName = $values[$fieldName];
         }
     }

@@ -52,11 +52,9 @@
               placeholder="Password" required>
         
         <div class="text-danger">
-          <?php  
-          if (isset($_SESSION['validationRules']['error'])) {
-            echo $_SESSION['validationRules']['error']; /* */ 
-          }
-          ?>
+            <?php foreach($_SESSION['validationRules']['errors'] as $error) { ?>
+              <?=$error;?> <br />
+            <?php }?>
         </div>
         
         <div class="checkbox mb-3">

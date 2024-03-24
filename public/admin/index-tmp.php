@@ -14,11 +14,12 @@ require_once ROOT_PATH . 'src/DatabaseConnection.php';
 require_once ROOT_PATH . 'src/Entity.php';
 require_once ROOT_PATH . 'src/Auth.php';
 require_once MODULE_PATH . 'user/models/User.php';
-require_once ROOT_PATH . 'src/validators/Validator.php';
+// require_once ROOT_PATH . 'src/validators/Validator.php';
 
 // Bootstrap
   /* Connect to a MySQL database using driver invocation */
-DatabaseConnection::connect(DBNAME, HOST, USER, PASS); 
+DatabaseConnection::connect(DBNAME, HOST, USER, PASS);
+
 
 
 $dbh = DatabaseConnection::getInstance();
@@ -27,21 +28,21 @@ $userObj = new User($dbc);
 
 $userObj->findBy('username', 'admin');
 
-// $newPassword = 'TopSecret';
-$newPassword = 'TopHemmeligtNemligSå';
+$newPassword = 'TopSecret';
+// $newPassword = 'TopHemmeligtNemligSå';
 
-$passwordValidator = new Validator($newPassword, 'password');
+// $passwordValidator = new Validator($newPassword, 'password');
 
-$validate = $passwordValidator->Validate();
-var_dump($validate);
+// $validate = $passwordValidator->Validate();
+// var_dump($validate);
 
-if ( $validate[0] ) {
-  $authObj = new Auth();
-  $userObj = $authObj->changeUserPassword($userObj, $newPassword);
+// if ( $validate[0] ) {
+    $authObj = new Auth();
+    $userObj = $authObj->changeUserPassword($userObj, $newPassword);
 
-  var_dump($userObj);
-} else {
-  var_dump($validate[1]);
-}
+    var_dump($userObj);
+// } else {
+//     var_dump($validate[1]);
+// }
 
 /* ADMIN TEMP - admin/index-tmp.php END */

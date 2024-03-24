@@ -27,26 +27,14 @@ class DashboardController extends Controller {
       $password = $_POST['password'] ?? '';
 
       $validation = new Validation();
-
-      /* 
-      if(!$validation->validateUsername($username)) {
-        $_SESSION['validationRules']['error'] = "The User name is not a valid e-mailaddress";
-      }
-
-      if(!$validation->validatePassword($password)) {
-        $_SESSION['validationRules']['error'] = "Password must be between 3 and 20 characters"
-                . " and must contain at least one special character";
-      }
-      */
-
       if (!$validation
             ->addRule(new ValidateMinimum(3))
             ->addRule(new ValidateMaximum(20))
+            ->addRule(new ValidateNoEmptySpaces())
             ->addRule(new ValidateSpecialCharacter())
             ->validate($password)
           ) {
-        $_SESSION['validationRules']['error'] = "Password must be between 3 and 20 characters"
-            . " and must contain at least one special character";
+        $_SESSION['validationRules']['errors'] = $validation->getAllErrorMessages();
       }
 
       if (!$validation
@@ -55,10 +43,10 @@ class DashboardController extends Controller {
             ->addRule(new ValidateEmail())
             ->validate($username)
           ) {
-        $_SESSION['validationRules']['error'] = "The User name is not a valid e-mailaddress";
+        $_SESSION['validationRules']['errors'] = $validation->getAllErrorMessages();
       }
 
-      if(($_SESSION['validationRules']['error'] ?? '') == '') {
+      if(($_SESSION['validationRules']['errors'] ?? '') == '') {
         $auth = new Auth();
         if($auth->checkLogin($username, $password)) {
           // all is good
@@ -67,17 +55,15 @@ class DashboardController extends Controller {
           exit();
         } 
         
-        $_SESSION['validationRules']['error'] = "User name or password is incorrect";
+        $_SESSION['validationRules']['errors'] = $validation->getAllErrorMessages();
         
       }
       
-     //  var_dump('Bad login');
-      // echo '<br />Bad login<br />';
     }
 
     include VIEW_PATH . 'admin/login.html';
     // echo '<br />  unsetting \$_SESSION[\'validationRules\'][\'error\']  <br />';
-    unset($_SESSION['validationRules']['error']);
+    unset($_SESSION['validationRules']['errors']);
     // var_dump($_SESSION);
     
   }

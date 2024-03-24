@@ -1,14 +1,17 @@
 <?php
 
-class ValidateEmail {
-
-  function validateRule($value) { 
-    if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
-      echo "<br />username not email<br />u";
-      return false;
+class ValidateEmail implements ValidationRuleInterface {
+    function validateRule($value) {
+        
+        if (!filter_var($value, FILTER_VALIDATE_EMAIL)) {
+            return false;
+        }
+        
+        return true;
+        
     }
     
-    return true;
-
-  }
+    function getErrorMessage() {
+        return "Email format is not correct.";
+    }
 }

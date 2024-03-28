@@ -6,7 +6,7 @@ define('VIEW_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARAT
 define('MODULE_PATH', ROOT_PATH . DIRECTORY_SEPARATOR . 'modules' . DIRECTORY_SEPARATOR);
 
 require_once ROOT_PATH . '/src/Controller.php';
-require_once ROOT_PATH . '/src/Template.php';
+require_once ROOT_PATH . '/src/template.php';
 require_once ROOT_PATH . 'dbconfig.php';
 require_once ROOT_PATH . 'src/DatabaseConnection.php';
 require_once ROOT_PATH . 'src/Entity.php';
@@ -38,6 +38,9 @@ if(file_exists($controllerFile)) {
     
     include $controllerFile;
     $controller = new $moduleName();
+
+
+    $controller->template = new Template('layout/default');
     $controller->setEntityId($router->entity_id);
     $controller->runAction($action);
 

@@ -28,7 +28,7 @@ $userObj = new User($dbc);
 
 $userObj->findBy('username', 'admin');
 
-$newPassword = 'TopSecret';
+$newPassword = 'Top#Secret';
 // $newPassword = 'TopHemmeligtNemligSå';
 
 // $passwordValidator = new Validator($newPassword, 'password');

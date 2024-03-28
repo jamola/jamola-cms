@@ -14,7 +14,7 @@ define('ENCRYPTION_SALT', 'jh3245hgdfv8934hu3nvr4h5i');
 
 require_once ROOT_PATH . '/src/interfaces/validationRuleInterface.php';
 require_once ROOT_PATH . '/src/Controller.php';
-require_once ROOT_PATH . '/src/Template.php';
+require_once ROOT_PATH . '/src/template.php';
 require_once ROOT_PATH . 'dbconfig.php';
 require_once ROOT_PATH . 'src/DatabaseConnection.php';
 require_once ROOT_PATH . 'src/Entity.php';
@@ -28,26 +28,33 @@ require_once ROOT_PATH . 'src/validationRules/ValidateSpecialCharacter.php';
 require_once ROOT_PATH . 'src/validationRules/ValidateNoEmptySpaces.php';
 require_once MODULE_PATH . 'page/models/Page.php';
 require_once MODULE_PATH . 'user/models/User.php';
-// Jan forsøger
-// require_once ROOT_PATH . 'src/validators/Validator.php';
-// Darwin
 
 // Bootstrap
   /* Connect to a MySQL database using driver invocation */
 DatabaseConnection::connect(DBNAME, HOST, USER, PASS); 
 
 
-$section = $_GET['module'] ?? $_POST['module'] ?? 'dashboard';
+$module = $_GET['module'] ?? $_POST['module'] ?? 'dashboard';
 $action = $_GET['action'] ?? $_POST['action'] ?? 'default';
 
 
 
-if ($section=='dashboard') {
+if ($module=='dashboard') {
     
     include MODULE_PATH . 'dashboard/admin/controllers/DashboardController.php';
     
     $dashboardController = new DashboardController();
+    $dashboardController->template = new Template('admin/layout/default');
     $dashboardController->runAction($action);
     
-} 
+} elseif($module == 'page') {
+
+    
+  include MODULE_PATH . 'page/admin/controllers/PageController.php';
+    
+  $pageController = new PageController();
+  $pageController->template = new Template('admin/layout/default');
+  $pageController->runAction($action);
+
+}
 /* ADMIN - admin/index.php END */

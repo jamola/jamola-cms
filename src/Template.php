@@ -1,4 +1,5 @@
 <?php
+namespace src;
 
 class Template {
     private $layout;

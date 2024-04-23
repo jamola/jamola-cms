@@ -1,6 +1,10 @@
 <?php
 
 
+namespace src;
+
+// use modules\user\models\User;
+use modules\user\models\User;
 
 class Auth {
   function checkLogin($username, $password) {

@@ -1,5 +1,5 @@
 <?php
-
+namespace src;
 final class DatabaseConnection {
 
 
@@ -24,7 +24,7 @@ final class DatabaseConnection {
 
   public static function connect($host, $dbName, $user, $password) {
     // var_dump('We are connected to the database only once since the implentation is a singleton');
-    self::$connection = new PDO("mysql:dbname=$dbName;host=$host", $user, $password);
+    self::$connection = new \PDO("mysql:dbname=$dbName;host=$host", $user, $password);
   }
 
   public static function getConnection() {

@@ -1,6 +1,13 @@
 <?php
 
-class DashboardController extends Controller {
+namespace modules\dashboard\admin\controllers;
+use src\Validation;
+use src\Auth;
+use src\interfaces\validationRuleInterface;
+use src\validationRules\ValidateMinimum;
+use src\validationRules\ValidateMaximum;
+
+class DashboardController extends \src\Controller {
 
     function runBeforeAction() {
         if($_SESSION['is_admin'] ?? false == true){

@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Dashboard</title>
+  <title>Jamola CMS | Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"><!-- Bootstrap Font Icon CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
 
  
   <!-- Theme style -->
@@ -211,7 +214,7 @@
             </a>
           </li>
           <li class="nav-item menu-open">
-            <a href="#" class="nav-link">
+            <a href="/admin/index.php?module=page" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Pages
@@ -226,15 +229,18 @@
     <!-- /.sidebar -->
   </aside>
 
+  <!--content-wrapper -->
+  <div class="content-wrapper">
+    <section class="content">  
 
-
-   
       <?php
       include MODULE_PATH . $template . '.html'; 
       ?>
 
+    </section>
+  </div>
+  t
 
-  
 
 
   <!-- /.content-wrapper -->
@@ -255,5 +261,7 @@
 <!-- ./wrapper -->
 
 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

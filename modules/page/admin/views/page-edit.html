@@ -1,0 +1,27 @@
+<!-- general form elements disabled -->
+<div class="card card-warning">
+  <div class="card-header">
+    <h3 class="card-title">Page id: <?=$page->id?></h3>
+  </div>
+  <!-- /.card-header -->
+  <div class="card-body">
+    <form action="" method="post">
+      <input type="hidden" name="action" value="1">
+      <!-- text input -->
+      <div class="form-group">
+        <label>Page name</label>
+        <input type="text" name="title" class="form-control" value="<?=$page->title?>" placeholder="Page name">
+      </div>
+      <!-- textarea -->
+      <div class="form-group">
+        <label>Textarea</label>
+        <textarea name="content" class="form-control" rows="3" value="" placeholder="Page content"><?=$page->content?></textarea>
+      </div>
+
+      <!-- submit form -->
+      <div class="card-footer">
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,5 +1,9 @@
 <?php 
 
+namespace src;
+
+use src\interfaces\validationRuleInterface;
+
 class Validation {
 
     private $rules;

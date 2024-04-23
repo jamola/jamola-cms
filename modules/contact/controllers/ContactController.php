@@ -1,5 +1,10 @@
 <?php
 
+namespace modules\contact\controllers;
+use \modules\page\models\Page;
+use src\Controller;
+use src\DatabaseConnection;
+
 /* ini_set ('display_errors', 1);
 ini_set ('display_startup_errors', 1);
 error_reporting (E_ALL); */
@@ -13,7 +18,7 @@ error_reporting (E_ALL); */
 // Dette virker require_once './src/Controller.php';
 
 
-class ContactController extends Controller {
+class ContactController extends \src\Controller {
 
     function runBeforeAction() {
         if ($_SESSION['has_submitted_the_form'] ?? 0 == 1 ) { 
@@ -54,9 +59,12 @@ class ContactController extends Controller {
         // validate
         // store data
         // send email
-        
+      
         $_SESSION['has_submitted_the_form'] = 1;
-        
+          
+        echo "<pre>_SESSION['has_submitted_the_form'] set:";
+        var_dump($_SESSION);
+        echo "</pre>";
         
         $variables['title'] = '';
         $variables['content'] = '';

@@ -9,3 +9,7 @@ test.php
 about-us.php
 calculateShipping.php
 public/admin/theme
+public/admin/modaltest.html
+vendor
+composer.json
+composer.lock

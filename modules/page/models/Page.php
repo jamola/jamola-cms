@@ -1,6 +1,7 @@
 <?php
+namespace modules\page\models;
 
-class Page extends Entity {
+class Page extends \src\Entity {
     
   public function __construct($dbc) {
     parent::__construct($dbc, 'pages');
@@ -9,7 +10,6 @@ class Page extends Entity {
 
   protected function initFields() {
       $this->fields = [
-        'id',
         'title',
         'content'
       ];
